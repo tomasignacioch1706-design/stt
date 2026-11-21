@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chrono-NYC: Selector de Niveles Retro</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="game-container">
+    <!-- Header Arcade -->
+    <header class="arcade-header">
+      <div class="title-badge">
+        <svg class="header-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="10" stroke="#00f3ff"/>
+          <polyline points="12 6 12 12 16 14" stroke="#ffb830"/>
+        </svg>
+        <div>
+          <h1 class="pixel-title">CHRONO-NYC</h1>
+          <div class="sub-title">El Viajero del Tiempo // Mapa Cuántico</div>
+        </div>
+      </div>
+
+      <div class="hud-stats">
+        <div class="stat-item">
+          <span class="stat-label">ÉPOCA:</span>
+          <span id="hudCurrentYear" class="stat-val">1920</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-label">ESTADO:</span>
+          <span id="hudStatus" class="stat-val" style="color: var(--neon-cyan);">ACTIVO</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- Canvas Screen Frame -->
+    <div class="screen-wrapper" id="screenWrapper">
+      <canvas id="mapCanvas" width="960" height="540"></canvas>
+      <div class="crt-overlay"></div>
+      <div id="screenToast" class="screen-toast">⚠ ¡NIVEL BLOQUEADO!</div>
+    </div>
+
+    <!-- Controls & Info Footer -->
+    <footer class="arcade-controls">
+      <div class="control-tips" id="controlTips">
+        <span style="color: var(--neon-amber);">● CONTROLES:</span>
+        <span id="controlTipMove"><span class="key-tag">←</span> <span class="key-tag">→</span> <span class="key-tag">↑</span> <span class="key-tag">↓</span> / <span class="key-tag">WASD</span> Mover</span>
+        <span id="controlTipAction"><span class="key-tag">ESPACIO</span> Iniciar Nivel</span>
+      </div>
+
+      <div class="action-buttons">
+        <button id="btnReturnToMap" class="retro-btn" style="display: none; background: #7f1d1d; border-color: #ef4444; color: #fff;" title="Salir de la época y volver al mapa">
+          ◀ Volver al Mapa [ESC]
+        </button>
+        <button id="btnAudioToggle" class="retro-btn" title="Activar/Silenciar efectos">
+          <span id="audioIcon">♪</span> Audio: ON
+        </button>
+        <button id="btnCrtToggle" class="retro-btn" title="Alternar filtro retro CRT">
+          [CRT] Filtro: ON
+        </button>
+        <button id="btnToggleAllLevels" class="retro-btn primary" title="Desbloquear o bloquear todos para pruebas">
+          ★ Desbloquear Todos
+        </button>
+      </div>
+    </footer>
+
+    <!-- Mobile / Mouse On-screen Gamepad -->
+    <div class="touch-dpad-container">
+      <div class="dpad-grid">
+        <button class="dpad-btn dpad-up" id="btnUp" title="Arriba">▲</button>
+        <button class="dpad-btn dpad-left" id="btnLeft" title="Izquierda">◀</button>
+        <button class="dpad-btn dpad-right" id="btnRight" title="Derecha">▶</button>
+        <button class="dpad-btn dpad-down" id="btnDown" title="Abajo">▼</button>
+      </div>
+
+      <div class="touch-actions">
+        <button class="action-btn-space" id="btnTouchSpace">
+          ⚡ VIAJAR [ESPACIO]
+        </button>
+        <div style="font-size: 11px; color: #64748b; text-align: center;">
+          * También puedes hacer clic directo en los nodos
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal para Iniciar Nivel / Salto Temporal -->
+  <div id="timeModal" class="time-travel-modal">
+    <div class="modal-card">
+      <div class="modal-header">
+        <div id="modalYear" class="modal-era-year">1920</div>
+        <div id="modalTitle" class="modal-era-title">ERA DEL JAZZ & LEY SECA</div>
+      </div>
+      <div class="modal-body">
+        <p id="modalDesc">
+          El viajero aterriza en las calles de adoquines de Manhattan durante los Locos Años 20. El jazz resuena en los clubes clandestinos speakeasy y la ciudad se alza hacia las nubes con los primeros rascacielos Art Déco.
+        </p>
+
+        <div class="modal-info-box">
+          <div class="modal-info-row">
+            <span class="modal-label">UBICACIÓN:</span>
+            <span id="modalLocation" class="modal-val">Lower Manhattan & Brooklyn DUMBO</span>
+          </div>
+          <div class="modal-info-row">
+            <span class="modal-label">MISIÓN CUÁNTICA:</span>
+            <span id="modalMission" class="modal-val">Recuperar el fragmento de crono-cristal</span>
+          </div>
+          <div class="modal-info-row">
+            <span class="modal-label">PELIGRO TEMPORAL:</span>
+            <span id="modalDanger" class="modal-val" style="color: #f59e0b;">Mafiosos de los Speakeasy & Agentes Temporales</span>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button id="btnCloseModal" class="btn-close-modal">VOLVER AL MAPA</button>
+        <button id="btnStartLevel" class="btn-start-level">⚡ ENTRAR A LA ÉPOCA</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="game.js"></script>
+</body>
+</html>
